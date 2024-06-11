@@ -1,29 +1,18 @@
-/* body {
-  font-family: Arial, sans-serif;
-  padding: 20px;
-  text-align: center;
-} */
-
-#cameraContainer {
-  position: relative;
-  display: inline-block;
-}
-
-#camera, #photoCanvas {
-  border: 1px solid #ccc;
-  margin-top: 10px;
-}
-
-button {
-  display: block;
+.card {
   margin: 20px auto;
-  padding: 10px 20px;
-  background-color: #28a745;
-  color: #fff;
-  border: none;
-  cursor: pointer;
+  text-align: center;
 }
 
-button:hover {
-  background-color: #218838;
+.card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-group {
+  width: 100%;
+}
+
+#capturedPhoto {
+  object-fit: cover;
 }
