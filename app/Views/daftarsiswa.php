@@ -13,6 +13,7 @@
               <tr>
                 <th scope="col">No</th>
                 <th scope="col">NIS</th>
+                <th scope="col">Foto</th>
                 <th scope="col">Nama Siswa</th>
                 <th scope="col">Kelas</th>
                 <th scope="col">Aksi</th>
@@ -20,23 +21,15 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td colspan="2">Larry the Bird</td>
-                <td>@twitter</td>
-              </tr>
+              <?php foreach ($daftar as $d) : ?>
+                <tr>
+                  <th scope="row"><?= $index + 1; ?></th>
+                  <td><?= $d['nis']; ?></td>
+                  <td><?= $d['foto']; ?></td>
+                  <td><?= $d['nama']; ?></td>
+                  <td><?= $d['kelas']; ?></td>
+                </tr>
+              <?php endforeach; ?>
             </tbody>
           </table>
         </div>

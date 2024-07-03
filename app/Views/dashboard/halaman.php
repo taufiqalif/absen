@@ -2,14 +2,13 @@
 <html lang="en">
 
 <head>
-
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>SB Admin 2 - Dashboard</title>
+  <title><?= $title; ?></title>
 
   <!-- bootstrap 5 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -29,7 +28,6 @@
 
   <!-- Page Wrapper -->
   <div id="wrapper">
-
     <!-- Sidebar -->
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
@@ -47,7 +45,7 @@
       <!-- Nav Item - Dashboard -->
       <li class="nav-item">
         <a class="nav-link" href="<?= base_url('/'); ?>">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <!-- <i class="fas fa-fw fa-tachometer-alt"></i> -->
           <span>Dashboard</span></a>
       </li>
 
@@ -56,7 +54,7 @@
 
       <li class="nav-item">
         <a class="nav-link" href="<?= base_url('siswa'); ?>">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <!-- <i class="fas fa-fw fa-tachometer-alt"></i> -->
           <span>Daftar Siswa</span></a>
       </li>
 
@@ -64,12 +62,11 @@
 
       <li class="nav-item">
         <a class="nav-link" href="<?= base_url('absensi'); ?>">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <!-- <i class="fas fa-fw fa-tachometer-alt"></i> -->
           <span>Absensi Siswa</span></a>
       </li>
 
       <hr class="sidebar-divider">
-
 
       <!-- Sidebar Toggler (Sidebar) -->
       <div class="text-center d-none d-md-inline">
@@ -81,35 +78,26 @@
 
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
-
       <!-- Main Content -->
       <div id="content">
-
         <!-- Topbar -->
         <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
           <!-- Sidebar Toggle (Topbar) -->
           <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
             <i class="fa fa-bars"></i>
           </button>
-
           <!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">
-
             <div class="topbar-divider d-none d-sm-block"></div>
             <a href="">Logout</a>
-
-
           </ul>
-
         </nav>
         <!-- End of Topbar -->
 
         <!-- Begin Page Content -->
         <div class="container-fluid">
-
-          <?= $this->renderSection('konten'); ?>
-
+          <h1><?= $title; ?></h1> <!-- Example Content -->
+          <?= $this->renderSection('konten'); ?> <!-- Placeholder for specific page content -->
         </div>
         <!-- End of Main Content -->
 
@@ -122,10 +110,8 @@
           </div>
         </footer>
         <!-- End of Footer -->
-
       </div>
       <!-- End of Content Wrapper -->
-
     </div>
     <!-- End of Page Wrapper -->
 
@@ -159,7 +145,6 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
 </body>
 
 </html>
