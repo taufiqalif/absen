@@ -27,15 +27,33 @@
             <div class="form-group">
               <label for="name">Nama Siswa:</label>
               <input type="text" id="name" name="name" class="form-control" required>
+
               <label for="kelas">Kelas:</label>
-              <input type="text" id="kelas" name="kelas" class="form-control" required>
+              <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                  Pilih Kelas
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" id="kelasDropdown">
+                  <li><a class="dropdown-item" href="#" data-value="Kelas 7 A">Kelas 7 A</a></li>
+                  <li><a class="dropdown-item" href="#" data-value="Kelas 7 B">Kelas 7 B</a></li>
+                  <li><a class="dropdown-item" href="#" data-value="Kelas 7 C">Kelas 7 C</a></li>
+                  <li><a class="dropdown-item" href="#" data-value="Kelas 8 A">Kelas 8 A</a></li>
+                  <li><a class="dropdown-item" href="#" data-value="Kelas 8 B">Kelas 8 B</a></li>
+                  <li><a class="dropdown-item" href="#" data-value="Kelas 8 C">Kelas 8 C</a></li>
+                  <li><a class="dropdown-item" href="#" data-value="Kelas 9 A">Kelas 9 A</a></li>
+                  <li><a class="dropdown-item" href="#" data-value="Kelas 9 B">Kelas 9 B</a></li>
+                  <li><a class="dropdown-item" href="#" data-value="Kelas 9 C">Kelas 9 C</a></li>
+                </ul>
+              </div>
+              <input type="hidden" id="kelas" name="kelas">
             </div>
             <input type="hidden" id="photoData" name="photoData">
-            <button type="button" id="captureButton" class="btn btn-secondary">Ambil Foto</button>
+            <button type="button" id="captureButton" class="btn btn-secondary mt-2">Ambil Foto</button>
           </form>
         </div>
       </div>
     </div>
+
 
     <!-- Menampilkan Hasil Gambar -->
     <div class="col-md-6">

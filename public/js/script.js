@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const studentInfo = document.getElementById('studentInfo');
     const nameInput = document.getElementById('name');
     const classInput = document.getElementById('kelas');
+    const kelasDropdownItems = document.querySelectorAll('#kelasDropdown .dropdown-item');
+    const dropdownMenuLink = document.getElementById('dropdownMenuLink');
 
     // Akses kamera
     navigator.mediaDevices.getUserMedia({ video: true })
@@ -29,5 +31,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Tampilkan nama dan kelas siswa
         studentInfo.innerHTML = `Nama: ${nameInput.value}<br>Kelas: ${classInput.value}`;
+    });
+
+    // Dropdown selection
+    kelasDropdownItems.forEach(item => {
+        item.addEventListener('click', (e) => {
+            e.preventDefault();
+            classInput.value = item.getAttribute('data-value');
+            dropdownMenuLink.textContent = item.textContent;
+        });
     });
 });

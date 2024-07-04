@@ -55,12 +55,12 @@ class Home extends BaseController
         $name = $this->request->getPost('name');
         $kelas = $this->request->getPost('kelas');
         $photoData = $this->request->getPost('photoData');
-    
+
         // Decode base64 image
         list($type, $photoData) = explode(';', $photoData);
         list(, $photoData) = explode(',', $photoData);
         $photoData = base64_decode($photoData);
-    
+
         // Simpan file ke folder images
         $fileName = uniqid() . '.png';
         if (file_put_contents('images/' . $fileName, $photoData)) {
@@ -71,21 +71,23 @@ class Home extends BaseController
                 'foto' => $fileName,
                 'created_at' => date('Y-m-d H:i:s') // Menyimpan waktu saat absensi
             ]);
-    
+
             // Set flashdata sukses
             session()->setFlashdata('success', 'Absensi berhasil disimpan.');
         } else {
             // Set flashdata gagal
             session()->setFlashdata('error', 'Gagal menyimpan absensi.');
         }
-    
+
         // Redirect atau tampilkan pesan
         return redirect()->to(base_url('absensi'));
     }
 
     public function daftarabsen()
     {
-        $absen = $this->AbsensiModel->findAll();
+        // $absen = $this->AbsensiModel->findAll();
+        // Ambil data absensi terbaru terlebih dahulu
+        $absen = $this->AbsensiModel->orderBy('created_at', 'DESC')->findAll();
         $data = [
             'title' => 'Daftar Absensi',
             'absen' => $absen
