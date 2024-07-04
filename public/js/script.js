@@ -21,12 +21,9 @@ document.addEventListener('DOMContentLoaded', () => {
     captureButton.addEventListener('click', () => {
         const context = canvas.getContext('2d');
         context.drawImage(video, 0, 0, canvas.width, canvas.height);
-        const imageData = canvas.toDataURL('images/png');
+        const imageData = canvas.toDataURL('image/png');
         photoData.value = imageData;
 
-        // menyimpan foto di folder images
-
-        
         // Tampilkan gambar yang diambil
         capturedPhoto.src = imageData;
 

@@ -20,6 +20,9 @@
   <!-- Custom styles for this template-->
   <link href="<?= base_url('css/sb-admin-2.min.css') ?>" rel="stylesheet">
 
+  <!-- icont -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
   <link rel="stylesheet" href="<?= base_url('css/style.css') ?>">
 
 </head>
@@ -45,7 +48,7 @@
       <!-- Nav Item - Dashboard -->
       <li class="nav-item">
         <a class="nav-link" href="<?= base_url('/'); ?>">
-          <!-- <i class="fas fa-fw fa-tachometer-alt"></i> -->
+          <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
       </li>
 
@@ -54,7 +57,7 @@
 
       <li class="nav-item">
         <a class="nav-link" href="<?= base_url('siswa'); ?>">
-          <!-- <i class="fas fa-fw fa-tachometer-alt"></i> -->
+          <i class="bi bi-person-rolodex"></i>
           <span>Daftar Siswa</span></a>
       </li>
 
@@ -62,8 +65,16 @@
 
       <li class="nav-item">
         <a class="nav-link" href="<?= base_url('absensi'); ?>">
-          <!-- <i class="fas fa-fw fa-tachometer-alt"></i> -->
+          <i class="bi bi-camera-fill"></i>
           <span>Absensi Siswa</span></a>
+      </li>
+
+      <hr class="sidebar-divider">
+
+      <li class="nav-item">
+        <a class="nav-link" href="<?= base_url('daftarabsen'); ?>">
+          <i class="bi bi-list-check"></i>
+          <span>Daftar Absensi</span></a>
       </li>
 
       <hr class="sidebar-divider">
@@ -89,7 +100,7 @@
           <!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">
             <div class="topbar-divider d-none d-sm-block"></div>
-            <a href="">Logout</a>
+            <a class="btn btn-primary" href="#" role="button"><i class="bi bi-box-arrow-right"></i></a>
           </ul>
         </nav>
         <!-- End of Topbar -->
@@ -105,7 +116,7 @@
         <footer class="sticky-footer bg-white">
           <div class="container my-auto">
             <div class="copyright text-center my-auto">
-              <span>Copyright &copy; Your Website 2021</span>
+              <span>Copyright &copy; Your Website 2024</span>
             </div>
           </div>
         </footer>

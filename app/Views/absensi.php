@@ -2,8 +2,17 @@
 
 <?= $this->section('konten'); ?>
 
-
 <div class="container mt-5">
+  <?php if (session()->getFlashdata('success')) : ?>
+    <div class="alert alert-success">
+      <?= session()->getFlashdata('success'); ?>
+    </div>
+  <?php elseif (session()->getFlashdata('error')) : ?>
+    <div class="alert alert-danger">
+      <?= session()->getFlashdata('error'); ?>
+    </div>
+  <?php endif; ?>
+
   <div class="row">
     <!-- Mengambil Gambar -->
     <div class="col-md-6">
@@ -14,7 +23,7 @@
         </div>
         <div class="card-body">
           <h5 class="card-title">Absensi Siswa</h5>
-          <form id="attendanceForm" action="save_attendance.php" method="POST" enctype="multipart/form-data">
+          <form id="attendanceForm" action="<?= base_url('home/save_attendance') ?>" method="POST">
             <div class="form-group">
               <label for="name">Nama Siswa:</label>
               <input type="text" id="name" name="name" class="form-control" required>
@@ -31,10 +40,8 @@
     <!-- Menampilkan Hasil Gambar -->
     <div class="col-md-6">
       <div class="card" style="width: 18rem;">
-        <!-- Tampilkan layar hitam sebelum siswa mengambil gambar -->
         <img id="capturedPhoto" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" class="card-img-top" alt="Hasil foto akan muncul di sini" style="background-color: #000;">
         <div class="card-body">
-          <!-- Nama dan kelas siswa ditampilkan di sini -->
           <p class="card-text" id="studentInfo">Nama: -<br>Kelas: -</p>
         </div>
         <button type="submit" form="attendanceForm" class="btn btn-primary mt-2">Absen</button>
@@ -42,7 +49,5 @@
     </div>
   </div>
 </div>
-
-
 
 <?= $this->endSection(); ?>

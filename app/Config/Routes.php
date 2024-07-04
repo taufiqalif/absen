@@ -7,4 +7,8 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', 'Home::index');
 $routes->get('/siswa', 'Home::siswa');
-$routes->get('/absensi', 'Home::absen');
+$routes->get('/absensi', 'Home::absen'); // URL yang benar
+
+$routes->get('daftarabsen', 'Home::daftarabsen');
+
+$routes->post('/home/save_attendance', 'Home::save_attendance'); // Perhatikan ada '/' sebelum 'home'
