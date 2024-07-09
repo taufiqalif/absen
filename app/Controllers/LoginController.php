@@ -7,71 +7,104 @@ use CodeIgniter\Controller;
 
 class LoginController extends Controller
 {
-    public function index()
-    {
-        return view('users/login');
-    }
+  public function login()
+  {
+    return view('users/login');
+  }
 
-    public function submit()
-    {
-        $session = session();
-        $userModel = new UserModel();
+  public function submit()
+  {
+    $session = session();
+    $userModel = new UserModel();
 
-        $nisn = $this->request->getVar('nisn');
-        $nama = $this->request->getVar('nama');
-        $kelas = $this->request->getVar('kelas');
-        $email = $this->request->getVar('email');
-        $password = $this->request->getVar('password');
-        $confirm_password = $this->request->getVar('confirm_password');
+    $email = $this->request->getVar('email');
+    $password = $this->request->getVar('password');
 
-        // Validasi form
-        $rules = [
-            'nisn' => 'required',
-            'nama' => 'required',
-            'kelas' => 'required',
-            'email' => 'required|valid_email|is_unique[users.email]',
-            'password' => 'required|min_length[6]',
-            'confirm_password' => 'matches[password]'
+    $data = $userModel->where('email', $email)->first();
+
+    if ($data) {
+      $pass = $data['password'];
+      $authenticatePassword = password_verify($password, $pass);
+      if ($authenticatePassword) {
+        $sessionData = [
+          'id' => $data['id'],
+          'email' => $data['email'],
+          'logged_in' => TRUE
         ];
+        $session->set($sessionData);
+        return redirect()->to('/dashboard'); // Mengarahkan ke halaman absensi
+      } else {
+        $session->setFlashdata('error', 'Password is incorrect.');
+        return redirect()->to('/');
+      }
+    } else {
+      $session->setFlashdata('error', 'Email does not exist.');
+      return redirect()->to('/dashboard');
+    }
+  }
 
-        if (!$this->validate($rules)) {
-            $validation = \Config\Services::validation();
-            return redirect()->to('/registrasi')->withInput()->with('validation', $validation);
-        }
 
-        // Encrypt password
-        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+  public function registrasi()
+  {
+    $data = [
+      'title' => 'Registrasi'
+    ];
 
-        // Simpan ke database
-        $userData = [
-            'nisn' => $nisn,
-            'nama' => $nama,
-            'kelas' => $kelas,
-            'email' => $email,
-            'password' => $hashed_password
-        ];
+    return view('users/registrasi', $data);
+  }
 
-        $userModel->save($userData);
+  public function submit_registration()
+  {
+    $session = session();
+    $userModel = new UserModel();
 
-        // Set flashdata sukses
-        $session->setFlashdata('success', 'Registrasi berhasil.');
+    // Ambil data dari form
+    $nisn = $this->request->getVar('nisn');
+    $nama = $this->request->getVar('nama');
+    $kelas = $this->request->getVar('kelas');
+    $email = $this->request->getVar('email');
+    $password = $this->request->getVar('password');
+    $confirm_password = $this->request->getVar('confirm_password');
 
-        return redirect()->to('/login');
+    // Validasi form
+    $rules = [
+      'nisn' => 'required',
+      'nama' => 'required',
+      'kelas' => 'required',
+      'email' => 'required|valid_email|is_unique[users.email]',
+      'password' => 'required|min_length[6]',
+      'confirm_password' => 'matches[password]'
+    ];
+
+    if (!$this->validate($rules)) {
+      $validation = \Config\Services::validation();
+      return redirect()->to('/registrasi')->withInput()->with('validation', $validation);
     }
 
-    public function registrasi()
-    {
-        $data = [
-            'title' => 'Registrasi'
-        ];
+    // Encrypt password
+    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-        return view('users/registrasi', $data);
-    }
+    // Simpan ke database
+    $userData = [
+      'nisn' => $nisn,
+      'nama' => $nama,
+      'kelas' => $kelas,
+      'email' => $email,
+      'password' => $hashed_password
+    ];
 
-    public function logout()
-    {
-        $session = session();
-        $session->destroy();
-        return redirect()->to('/login');
-    }
+    $userModel->save($userData);
+
+    // Set flashdata sukses
+    $session->setFlashdata('success', 'Registrasi berhasil.');
+
+    return redirect()->to('/');
+  }
+
+  public function logout()
+  {
+    $session = session();
+    $session->destroy();
+    return redirect()->to('/login');
+  }
 }

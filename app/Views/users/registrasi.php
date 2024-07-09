@@ -5,7 +5,7 @@
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-md-5">
-      <form action="<?= base_url('/register/submit'); ?>" method="post">
+      <form action="/register/submit" method="post">
         <div class="mb-3">
           <label for="nisn" class="form-label">NISN</label>
           <input type="text" class="form-control" id="nisn" name="nisn" required>
@@ -16,8 +16,7 @@
         </div>
         <div class="mb-3">
           <label for="kelas" class="form-label">Kelas</label>
-          <select class="form-control" id="kelas" name="kelas" required>
-            <option value="">Pilih Kelas</option>
+          <select class="form-select" id="kelas" name="kelas" required>
             <option value="Kelas 7 A">Kelas 7 A</option>
             <option value="Kelas 7 B">Kelas 7 B</option>
             <option value="Kelas 7 C">Kelas 7 C</option>
