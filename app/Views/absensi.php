@@ -13,7 +13,7 @@
     </div>
   <?php endif; ?>
 
-  <div class="row">
+  <div class="row justify-content-center p-3">
     <!-- Mengambil Gambar -->
     <div class="col-md-6">
       <div class="card" style="width: 18rem;">
@@ -48,21 +48,29 @@
               <input type="hidden" id="kelas" name="kelas">
             </div>
             <input type="hidden" id="photoData" name="photoData">
-            <button type="button" id="captureButton" class="btn btn-secondary mt-2">Ambil Foto</button>
+            <button type="button" id="captureButton" class="btn btn-secondary mt-2" data-bs-toggle="modal" data-bs-target="#photoModal">Ambil Foto</button>
           </form>
         </div>
       </div>
     </div>
+  </div>
+</div>
 
-
-    <!-- Menampilkan Hasil Gambar -->
-    <div class="col-md-6">
-      <div class="card" style="width: 18rem;">
-        <img id="capturedPhoto" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" class="card-img-top" alt="Hasil foto akan muncul di sini" style="background-color: #000;">
-        <div class="card-body">
-          <p class="card-text" id="studentInfo">Nama: -<br>Kelas: -</p>
-        </div>
-        <button type="submit" form="attendanceForm" class="btn btn-primary mt-2">Absen</button>
+<!-- Modal -->
+<div class="modal fade" id="photoModal" tabindex="-1" aria-labelledby="photoModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="photoModalLabel">Foto Siswa</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <img id="modalCapturedPhoto" src="" alt="Hasil foto akan muncul di sini" style="width: 100%;">
+        <p id="modalStudentInfo"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+        <button type="submit" form="attendanceForm" class="btn btn-primary">Absen</button>
       </div>
     </div>
   </div>

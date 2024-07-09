@@ -14,9 +14,19 @@ class Home extends BaseController
     {
         $this->DaftarSiswaModel = new DaftarSiswaModel();
         $this->AbsensiModel = new AbsensiModel();
+        helper('url');
     }
+
+    private function checkLogin()
+    {
+        if (!session()->get('logged_in')) {
+            return redirect()->to('/login');
+        }
+    }
+
     public function index()
     {
+        $this->checkLogin();
         $daftar = $this->DaftarSiswaModel->findAll();
         $JumlahSiswa = count($daftar);
         $data = [
@@ -29,20 +39,18 @@ class Home extends BaseController
 
     public function siswa()
     {
+        $this->checkLogin();
         $daftar = $this->DaftarSiswaModel->findAll();
         $data = [
             'title' => 'Daftar Siswa',
             'daftar' => $daftar
         ];
-
-        // $DaftarSiswaModel = new DaftarSiswaModel();
-
-
         return view('daftarsiswa', $data);
     }
 
     public function absen()
     {
+        $this->checkLogin();
         $data = [
             'title' => 'Absensi'
         ];
@@ -51,6 +59,7 @@ class Home extends BaseController
 
     public function save_attendance()
     {
+        $this->checkLogin();
         // Ambil data dari formulir
         $name = $this->request->getPost('name');
         $kelas = $this->request->getPost('kelas');
@@ -85,6 +94,7 @@ class Home extends BaseController
 
     public function daftarabsen()
     {
+        $this->checkLogin();
         // $absen = $this->AbsensiModel->findAll();
         // Ambil data absensi terbaru terlebih dahulu
         $absen = $this->AbsensiModel->orderBy('created_at', 'DESC')->findAll();

@@ -3,8 +3,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const canvas = document.getElementById('photoCanvas');
     const captureButton = document.getElementById('captureButton');
     const photoData = document.getElementById('photoData');
-    const capturedPhoto = document.getElementById('capturedPhoto');
-    const studentInfo = document.getElementById('studentInfo');
+    const modalCapturedPhoto = document.getElementById('modalCapturedPhoto');
+    const modalStudentInfo = document.getElementById('modalStudentInfo');
     const nameInput = document.getElementById('name');
     const classInput = document.getElementById('kelas');
     const kelasDropdownItems = document.querySelectorAll('#kelasDropdown .dropdown-item');
@@ -26,11 +26,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const imageData = canvas.toDataURL('image/png');
         photoData.value = imageData;
 
-        // Tampilkan gambar yang diambil
-        capturedPhoto.src = imageData;
-
-        // Tampilkan nama dan kelas siswa
-        studentInfo.innerHTML = `Nama: ${nameInput.value}<br>Kelas: ${classInput.value}`;
+        // Tampilkan gambar yang diambil di dalam modal
+        modalCapturedPhoto.src = imageData;
+        modalStudentInfo.innerHTML = `Nama: ${nameInput.value}<br>Kelas: ${classInput.value}`;
     });
 
     // Dropdown selection

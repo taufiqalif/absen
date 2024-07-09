@@ -79,6 +79,18 @@
 
       <hr class="sidebar-divider">
 
+      <li class="nav-item">
+        <a class="nav-link" href="<?= base_url('registrasi'); ?>">
+          <i class="bi bi-list-check"></i>
+          <span>Registrasi</span></a>
+      </li>
+
+      <hr class="sidebar-divider">
+
+
+
+
+
       <!-- Sidebar Toggler (Sidebar) -->
       <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
@@ -91,14 +103,22 @@
     <div id="content-wrapper" class="d-flex flex-column">
       <!-- Main Content -->
       <div id="content">
+        <?php
+        // Mengambil waktu sekarang saat halaman dimuat
+        $currentTime = date('H:i:s');
+        ?>
         <!-- Topbar -->
         <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
           <!-- Sidebar Toggle (Topbar) -->
           <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
             <i class="fa fa-bars"></i>
           </button>
+
           <!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <span id="clock" class="nav-link"><?php echo $currentTime; ?></span>
+            </li>
             <div class="topbar-divider d-none d-sm-block"></div>
             <a class="btn btn-primary" href="#" role="button"><i class="bi bi-box-arrow-right"></i></a>
           </ul>
@@ -156,6 +176,25 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+    <script>
+      // Fungsi untuk memperbarui jam setiap detik
+      function updateClock() {
+        const clockElement = document.getElementById('clock');
+        const now = new Date();
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+        clockElement.innerHTML = `${hours}:${minutes}:${seconds}`;
+      }
+
+      // Memperbarui jam setiap detik
+      setInterval(updateClock, 1000);
+
+      // Menjalankan fungsi pertama kali saat halaman dimuat
+      updateClock();
+    </script>
 </body>
 
 </html>
