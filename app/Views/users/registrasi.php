@@ -7,6 +7,13 @@
     <div class="col-md-5">
       <form action="/register/submit" method="post">
         <div class="mb-3">
+          <label for="role" class="form-label">Role</label>
+          <select class="form-select" id="role" name="role" required>
+            <option value="admin">Admin</option>
+            <option value="siswa">Siswa</option>
+          </select>
+        </div>
+        <div class="mb-3">
           <label for="nisn" class="form-label">NISN</label>
           <input type="text" class="form-control" id="nisn" name="nisn" required>
         </div>
@@ -26,6 +33,7 @@
             <option value="Kelas 9 A">Kelas 9 A</option>
             <option value="Kelas 9 B">Kelas 9 B</option>
             <option value="Kelas 9 C">Kelas 9 C</option>
+            <option value="Admin">Admin</option>
           </select>
         </div>
         <div class="mb-3">

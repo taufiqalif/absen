@@ -29,20 +29,24 @@ class LoginController extends Controller
         $sessionData = [
           'id' => $data['id'],
           'email' => $data['email'],
+          'role' => $data['role'], // Simpan role di session
           'logged_in' => TRUE
         ];
         $session->set($sessionData);
-        return redirect()->to('/dashboard'); // Mengarahkan ke halaman absensi
+        if ($data['role'] == 'admin') {
+          return redirect()->to('/admin/dashboard'); // Redirect ke halaman admin
+        } else {
+          return redirect()->to('/dashboard'); // Redirect ke halaman siswa
+        }
       } else {
-        $session->setFlashdata('error', 'Password is incorrect.');
-        return redirect()->to('/');
+        $session->setFlashdata('error', 'Password salah.');
+        return redirect()->to('./');
       }
     } else {
-      $session->setFlashdata('error', 'Email does not exist.');
-      return redirect()->to('/dashboard');
+      $session->setFlashdata('error', 'Email tidak ditemukan.');
+      return redirect()->to('./');
     }
   }
-
 
   public function registrasi()
   {
@@ -50,7 +54,7 @@ class LoginController extends Controller
       'title' => 'Registrasi'
     ];
 
-    return view('users/registrasi', $data);
+    return view('/users/registrasi', $data);
   }
 
   public function submit_registration()
@@ -65,6 +69,7 @@ class LoginController extends Controller
     $email = $this->request->getVar('email');
     $password = $this->request->getVar('password');
     $confirm_password = $this->request->getVar('confirm_password');
+    $role = $this->request->getVar('role'); // Ambil nilai role dari form
 
     // Validasi form
     $rules = [
@@ -73,12 +78,14 @@ class LoginController extends Controller
       'kelas' => 'required',
       'email' => 'required|valid_email|is_unique[users.email]',
       'password' => 'required|min_length[6]',
-      'confirm_password' => 'matches[password]'
+      'confirm_password' => 'matches[password]',
+      'role' => 'required|in_list[admin,siswa]' // Validasi role
     ];
 
+
     if (!$this->validate($rules)) {
-      $validation = \Config\Services::validation();
-      return redirect()->to('/registrasi')->withInput()->with('validation', $validation);
+      $valid = \Config\Services::validation();
+      return redirect()->to('/registrasi')->withInput()->with('validation', $valid);
     }
 
     // Encrypt password
@@ -90,7 +97,8 @@ class LoginController extends Controller
       'nama' => $nama,
       'kelas' => $kelas,
       'email' => $email,
-      'password' => $hashed_password
+      'password' => $hashed_password,
+      'role' => $role // Simpan role ke dalam database
     ];
 
     $userModel->save($userData);
@@ -98,13 +106,13 @@ class LoginController extends Controller
     // Set flashdata sukses
     $session->setFlashdata('success', 'Registrasi berhasil.');
 
-    return redirect()->to('/');
+    return redirect()->to('./');
   }
 
   public function logout()
   {
     $session = session();
     $session->destroy();
-    return redirect()->to('/login');
+    return redirect()->to('./');
   }
 }

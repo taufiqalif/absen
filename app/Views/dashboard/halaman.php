@@ -34,7 +34,6 @@
     <!-- Sidebar -->
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-      <!-- Sidebar - Brand -->
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-laugh-wink"></i>
@@ -42,61 +41,65 @@
         <div class="sidebar-brand-text mx-3">Absensi Siswa <sup>2</sup></div>
       </a>
 
-      <!-- Divider -->
       <hr class="sidebar-divider my-0">
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item">
-        <a class="nav-link" href="<?= base_url('/'); ?>">
+        <a class="nav-link" href="<?= base_url('/dashboard'); ?>">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
       </li>
 
-      <!-- Divider -->
       <hr class="sidebar-divider">
+
+      <!-- Menu untuk Admin -->
 
       <li class="nav-item">
         <a class="nav-link" href="<?= base_url('siswa'); ?>">
           <i class="bi bi-person-rolodex"></i>
-          <span>Daftar Siswa</span></a>
+          <span>Daftar Siswa</span>
+        </a>
       </li>
 
-      <hr class="sidebar-divider">
+      <!-- Menu untuk Siswa -->
 
       <li class="nav-item">
         <a class="nav-link" href="<?= base_url('absensi'); ?>">
           <i class="bi bi-camera-fill"></i>
-          <span>Absensi Siswa</span></a>
+          <span>Absensi Siswa</span>
+        </a>
       </li>
-
-      <hr class="sidebar-divider">
-
       <li class="nav-item">
         <a class="nav-link" href="<?= base_url('daftarabsen'); ?>">
           <i class="bi bi-list-check"></i>
-          <span>Daftar Absensi</span></a>
+          <span>Daftar Absensi</span>
+        </a>
       </li>
-
-      <hr class="sidebar-divider">
 
       <li class="nav-item">
-        <a class="nav-link" href="<?= base_url('registrasi'); ?>">
+        <a class="nav-link" href="<?= base_url('./registrasi'); ?>">
           <i class="bi bi-list-check"></i>
-          <span>Registrasi</span></a>
+          <span>Registrasi</span>
+        </a>
+      </li>
+
+
+      <!-- Logout -->
+      <li class="nav-item">
+        <a class="nav-link" href="<?= base_url('logout'); ?>">
+          <i class="bi bi-box-arrow-right"></i>
+          <span>Logout</span>
+        </a>
       </li>
 
       <hr class="sidebar-divider">
 
-
-
-
-
-      <!-- Sidebar Toggler (Sidebar) -->
       <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
       </div>
 
     </ul>
+
     <!-- End of Sidebar -->
 
     <!-- Content Wrapper -->
@@ -120,7 +123,7 @@
               <span id="clock" class="nav-link"><?php echo $currentTime; ?></span>
             </li>
             <div class="topbar-divider d-none d-sm-block"></div>
-            <a class="btn btn-primary" href="#" role="button"><i class="bi bi-box-arrow-right"></i></a>
+            <a class="btn btn-primary" href="/logout" role="button"><i class="bi bi-box-arrow-right"></i></a>
           </ul>
         </nav>
         <!-- End of Topbar -->
