@@ -63,10 +63,11 @@ class Home extends BaseController
         // Ambil data dari formulir
         $name = $this->request->getPost('name');
         $kelas = $this->request->getPost('kelas');
+        // $photoData = $this->request->getPost('photoData');
         $photoData = $this->request->getPost('photoData');
-
         // Decode base64 image
         list($type, $photoData) = explode(';', $photoData);
+        
         list(, $photoData) = explode(',', $photoData);
         $photoData = base64_decode($photoData);
 
