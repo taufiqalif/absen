@@ -88,7 +88,6 @@
               <tr>
                 <th scope="col">No</th>
                 <th scope="col">NIS</th>
-                <!-- <th scope="col">Foto</th> -->
                 <th scope="col">Nama Siswa</th>
                 <th scope="col">Kelas</th>
 
@@ -99,7 +98,6 @@
                 <tr>
                   <th scope="row"><?= $index + 1; ?></th>
                   <td><?= $d['nis']; ?></td>
-                  <!-- <td><img src="<?= base_url('images/' . $d['foto']); ?>" alt="Foto Siswa" width="50" height="50"></td> -->
                   <td><?= $d['nama']; ?></td>
                   <td><?= $d['kelas']; ?></td>
                 </tr>

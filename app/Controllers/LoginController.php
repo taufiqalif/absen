@@ -29,15 +29,10 @@ class LoginController extends Controller
         $sessionData = [
           'id' => $data['id'],
           'email' => $data['email'],
-          'role' => $data['role'], // Simpan role di session
           'logged_in' => TRUE
         ];
         $session->set($sessionData);
-        if ($data['role'] == 'admin') {
-          return redirect()->to('/admin/dashboard'); // Redirect ke halaman admin
-        } else {
-          return redirect()->to('/dashboard'); // Redirect ke halaman siswa
-        }
+        return redirect()->to('/dashboard'); // Redirect ke halaman siswa
       } else {
         $session->setFlashdata('error', 'Password salah.');
         return redirect()->to('./');
@@ -54,7 +49,7 @@ class LoginController extends Controller
       'title' => 'Registrasi'
     ];
 
-    return view('/users/registrasi', $data);
+    return view('users/registrasi', $data);
   }
 
   public function submit_registration()
@@ -69,7 +64,6 @@ class LoginController extends Controller
     $email = $this->request->getVar('email');
     $password = $this->request->getVar('password');
     $confirm_password = $this->request->getVar('confirm_password');
-    $role = $this->request->getVar('role'); // Ambil nilai role dari form
 
     // Validasi form
     $rules = [
@@ -78,10 +72,8 @@ class LoginController extends Controller
       'kelas' => 'required',
       'email' => 'required|valid_email|is_unique[users.email]',
       'password' => 'required|min_length[6]',
-      'confirm_password' => 'matches[password]',
-      'role' => 'required|in_list[admin,siswa]' // Validasi role
+      'confirm_password' => 'matches[password]'
     ];
-
 
     if (!$this->validate($rules)) {
       $valid = \Config\Services::validation();
@@ -97,8 +89,7 @@ class LoginController extends Controller
       'nama' => $nama,
       'kelas' => $kelas,
       'email' => $email,
-      'password' => $hashed_password,
-      'role' => $role // Simpan role ke dalam database
+      'password' => $hashed_password
     ];
 
     $userModel->save($userData);
@@ -106,7 +97,7 @@ class LoginController extends Controller
     // Set flashdata sukses
     $session->setFlashdata('success', 'Registrasi berhasil.');
 
-    return redirect()->to('./');
+    return redirect()->to('/registrasi');
   }
 
   public function logout()

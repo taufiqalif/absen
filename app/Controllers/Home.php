@@ -48,6 +48,83 @@ class Home extends BaseController
         return view('daftarsiswa', $data);
     }
 
+    public function tambahSiswa()
+    {
+        $this->checkLogin();
+        $data = [
+            'title' => 'Tambah Siswa'
+        ];
+        return view('/siswa/tambah', $data);
+    }
+
+    public function saveSiswa()
+    {
+        $this->checkLogin();
+
+        // Ambil data dari formulir
+        $nis = $this->request->getPost('nis');
+        $nama = $this->request->getPost('nama');
+        $kelas = $this->request->getPost('kelas');
+
+        // Validasi form
+        $rules = [
+            'nis' => 'required|is_unique[daftar_siswa.nis]',
+            'nama' => 'required',
+            'kelas' => 'required'
+        ];
+
+        if (!$this->validate($rules)) {
+            $valid = \Config\Services::validation();
+            return redirect()->to('/tambahsiswa')->withInput()->with('validation', $valid);
+        }
+
+        // Simpan ke database
+        $this->DaftarSiswaModel->save([
+            'nis' => $nis,
+            'nama' => $nama,
+            'kelas' => $kelas
+        ]);
+
+        // Set flashdata sukses
+        session()->setFlashdata('success', 'Siswa berhasil ditambahkan.');
+
+        return redirect()->to('/siswa');
+    }
+
+    public function lihat($nis)
+    {
+        $this->checkLogin();
+
+        // Retrieve student data based on nis
+        $student = $this->DaftarSiswaModel->where('nis', $nis)->first();
+
+        if (!$student) {
+            session()->setFlashdata('error', 'Student not found.');
+            return redirect()->to('/siswa');
+        }
+
+        $data = [
+            'title' => 'Info Siswa',
+            'student' => $student
+        ];
+
+        return view('/siswa/lihat', $data);
+    }
+
+
+    public function hapus($nis)
+    {
+        $this->checkLogin();
+
+        // Find student by nis and delete
+        $this->DaftarSiswaModel->where('nis', $nis)->delete();
+
+        session()->setFlashdata('success', 'Student successfully deleted.');
+        return redirect()->to('/siswa');
+    }
+
+
+
     public function absen()
     {
         $this->checkLogin();
@@ -67,7 +144,7 @@ class Home extends BaseController
         $photoData = $this->request->getPost('photoData');
         // Decode base64 image
         list($type, $photoData) = explode(';', $photoData);
-        
+
         list(, $photoData) = explode(',', $photoData);
         $photoData = base64_decode($photoData);
 
